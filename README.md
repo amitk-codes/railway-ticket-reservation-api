@@ -34,6 +34,62 @@ A RESTful API that manages railway ticket reservations with a focus on proper be
    - Production mode: `npm start`
    - Setup and start in one command: `npm run setup-and-start`
 
+## Docker Deployment
+
+The project includes Docker support with convenient npm scripts for easy deployment.
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Quick Start
+
+```bash
+# Setup and start with Docker (recommended)
+npm run docker:setup
+
+# Or manually start services
+npm run docker:up
+```
+
+### Available Docker Commands
+
+```bash
+# Build Docker images
+npm run docker:build
+
+# Start services in background
+npm run docker:up
+
+# Start services in development mode (with logs)
+npm run docker:dev
+
+# Start services in production mode
+npm run docker:prod
+
+# Check service status
+npm run docker:status
+
+# Restart services
+npm run docker:restart
+
+# Stop services
+npm run docker:down
+
+# Clean up (remove containers and volumes)
+npm run docker:clean
+
+# Complete cleanup (remove everything including images)
+npm run docker:clean:all
+```
+
+### Access the API
+
+Once started, the API will be available at:
+- **API**: http://localhost:3000
+- **Health Check**: http://localhost:3000/health
+
 ## API Endpoints
 
 ### Get Available Tickets
