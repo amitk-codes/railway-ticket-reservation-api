@@ -1,0 +1,305 @@
+{
+	"info": {
+		"name": "Railway Ticket Reservation API",
+		"description": "API collection for Railway Ticket Reservation System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"version": "1.0.0"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": ["{{base_url}}"],
+					"path": ["health"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Availability & Status",
+			"item": [
+				{
+					"name": "Get Ticket Availability",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/available",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "available"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Booked Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/booked",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "booked"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Booking",
+			"item": [
+				{
+					"name": "Book Regular Adult Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"name\": \"John Doe\",\n    \"age\": 35,\n    \"gender\": \"MALE\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Senior Citizen Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"name\": \"Sarah Johnson\",\n    \"age\": 65,\n    \"gender\": \"FEMALE\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Lady with Child Under 5",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"name\": \"Mary Smith\",\n    \"age\": 32,\n    \"gender\": \"FEMALE\"\n  },\n  \"children\": [\n    {\n      \"name\": \"Bobby Smith\",\n      \"age\": 4,\n      \"gender\": \"MALE\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validation Tests",
+			"item": [
+				{
+					"name": "Book Ticket - Missing Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"age\": 30,\n    \"gender\": \"MALE\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Ticket - Invalid Age",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"name\": \"Test User\",\n    \"age\": 150,\n    \"gender\": \"MALE\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book Ticket - Invalid Gender",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"name\": \"Test User\",\n    \"age\": 30,\n    \"gender\": \"INVALID\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Retrieval",
+			"item": [
+				{
+					"name": "Get Ticket by PNR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/YOUR_PNR_HERE",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "YOUR_PNR_HERE"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ticket by Invalid PNR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/INVALID123",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "INVALID123"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Cancellation",
+			"item": [
+				{
+					"name": "Cancel Ticket by PNR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/cancel/YOUR_PNR_HERE",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "cancel", "YOUR_PNR_HERE"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Invalid PNR",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/cancel/INVALID123",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "cancel", "INVALID123"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Error Handling",
+			"item": [
+				{
+					"name": "Invalid Endpoint (404)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/invalid-endpoint",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "invalid-endpoint"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Malformed JSON (400)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"passenger\": {\n    \"name\": \"Test\",\n    \"age\": 30,\n    \"gender\": \"MALE\"\n  // Missing closing brace\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/tickets/book",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "tickets", "book"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+} 
