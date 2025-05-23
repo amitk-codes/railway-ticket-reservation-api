@@ -6,7 +6,17 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "setup": "node src/utils/setupDb.js",
-    "setup-and-start": "npm run setup && npm start"
+    "setup-and-start": "npm run setup && npm start",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:restart": "docker-compose restart",
+    "docker:status": "docker-compose ps",
+    "docker:clean": "docker-compose down -v --remove-orphans",
+    "docker:clean:all": "docker-compose down -v --rmi all --remove-orphans",
+    "docker:dev": "docker-compose -f docker-compose.yml up --build",
+    "docker:prod": "NODE_ENV=production docker-compose up -d --build",
+    "docker:setup": "./docker-start.sh"
   },
   "keywords": [],
   "author": "",
