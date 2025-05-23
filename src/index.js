@@ -6,6 +6,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+const ticketRoutes = require('./routes/ticketRoutes');
+
+const errorHandler = require('./middlewares/errorHandler');
+
 const app = express();
 
 // Middlewares
@@ -14,6 +18,10 @@ app.use(cors()); // Enable CORS
 app.use(morgan('dev')); // Request logging
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+
+// API routes
+app.use('/api/v1/tickets', ticketRoutes);
 
 // Health check route
 app.get('/health', (_req, res) => {
@@ -27,6 +35,9 @@ app.use((_req, res) => {
     message: 'Resource not found'
   });
 });
+
+// Global error handler
+app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 3000;
